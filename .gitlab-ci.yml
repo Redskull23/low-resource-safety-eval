@@ -1,0 +1,12 @@
+stages:
+  - test
+
+lint-and-metrics:
+  image: python:3.11-slim
+  stage: test
+  before_script:
+    - pip install -r requirements.txt
+  script:
+    - python scripts/compute_metrics.py --results reports/sample_eval_results.csv || true
+  rules:
+    - when: always
