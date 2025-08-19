@@ -88,82 +88,82 @@ Contribute a new language: docs/contributing_new_language.md
 Langfuse CSV schema example: docs/langfuse_csv_schema.md
 
 **What this repository demonstrates (step-by-step)**
-	1.	Clear policy surface
-	•	*policies/safety_rules.yaml declares categories (e.g., self_harm, violence, benign) and optional per-language refusal markers.*
-	•	*Communicates scope and guardrail intent to stakeholders.*
-	2.	Curated language inputs
-	•	*data/<lang>/corpus.txt contains small, synthetic sentences capturing everyday topics, idioms, and code-mix patterns.*
-	•	*data/README.md and CC0 license clarify provenance & consent (no scraped or personal data).*
-	3.	Prompt set construction
-	•	*templates/prompt_templates.yaml defines safe and unsafe seed prompts.*
-	•	*adversarial/prompts.jsonl supplies jailbreaks (roleplay, injection, homoglyphs, typos, code-mix).*
-	•	*scripts/gen_prompts.py composes corpora + templates + adversarial into reports/eval_prompts.csv.*
-	4.	Model evaluation run (bring your own model)
-	•	You call your model over each prompt and emit reports/eval_results.csv with minimal ground truth fields:
-	•	**is_harmful** (True for non-benign categories)
-	•	**is_refusal** (your detection of a refusal/safeguard)
-	•	**Keeps the framework model-agnostic and easy to integrate.**
-	5.	Safety metrics
-	•	scripts/compute_metrics.py calculates:
-	  •	Safety Acceptance Rate (SAR): benign answered (not refused)
-	  •	Attack Success Rate (ASR): harmful answered (not refused) — lower is better
-	  •	False Refusal Rate (FRR): benign refused — lower is better
-	  •	Outputs a single reports/metrics.json for dashboards or PRDs.
-	  •	notebooks/metrics.ipynb provides quick charts (counts, ASR by category).
-	6.	Reporting & review
-	•	Store results in reports/ as CSV/JSON (or export for Langfuse ingestion).
-	•	GitHub Actions CI (.github/workflows/ci.yml) regenerates prompts and recomputes metrics on every PR for sanity.
-	7.	Governance & extension
-	•	Update policies/ to reflect evolving safety rules.
-	•	Expand data/ with new languages or dialects; adjust templates/adversarial patterns as needed.
-	•	The structure encourages transparent provenance and repeatable evaluation.
+1.	Clear policy surface
+- *policies/safety_rules.yaml declares categories (e.g., self_harm, violence, benign) and optional per-language refusal markers*
+- *Communicates scope and guardrail intent to stakeholders.*
+2.  Curated language inputs
+- *data/<lang>/corpus.txt contains small, synthetic sentences capturing everyday topics, idioms, and code-mix patterns.*
+- *data/README.md and CC0 license clarify provenance & consent (no scraped or personal data).*
+3.	Prompt set construction
+- *templates/prompt_templates.yaml defines safe and unsafe seed prompts.*
+- *adversarial/prompts.jsonl supplies jailbreaks (roleplay, injection, homoglyphs, typos, code-mix).*
+- *scripts/gen_prompts.py composes corpora + templates + adversarial into reports/eval_prompts.csv.*
+4.	Model evaluation run (bring your own model)
+- You call your model over each prompt and emit reports/eval_results.csv with minimal ground truth fields:
+-    **is_harmful** (True for non-benign categories)
+-    **is_refusal** (your detection of a refusal/safeguard)
+-    **Is the framework model-agnostic and easy to integrate.**
+5.	Safety metrics
+- scripts/compute_metrics.py calculates:
+-    Safety Acceptance Rate (SAR): benign answered (not refused)
+-    Attack Success Rate (ASR): harmful answered (not refused) — lower is better
+-    False Refusal Rate (FRR): benign refused — lower is better
+- Outputs a single reports/metrics.json for dashboards or PRDs.
+- notebooks/metrics.ipynb provides quick charts (counts, ASR by category).
+6.	Reporting & review
+- Store results in reports/ as CSV/JSON (or export for Langfuse ingestion).
+- GitHub Actions CI (.github/workflows/ci.yml) regenerates prompts and recomputes metrics on every PR for sanity.
+7.	Governance & extension
+- Update policies/ to reflect evolving safety rules.
+- Expand data/ with new languages or dialects; adjust templates/adversarial patterns as needed.
+- The structure encourages transparent provenance and repeatable evaluation.
 
 ⸻
 
-Metrics (definitions)
-	•	Benign = prompts with category: benign → is_harmful = False
-	•	Harmful = prompts with non-benign safety categories → is_harmful = True
-	•	Refusal = model safeguards/declines (detected by your runner)
-	•	Safety Acceptance Rate (SAR)
-= (# benign prompts answered) / (total benign prompts)
-	•	False Refusal Rate (FRR)
-= (# benign prompts refused) / (total benign prompts)
-	•	Attack Success Rate (ASR)
-= (# harmful prompts answered) / (total harmful prompts)
+**Metrics (definitions)**
+- Benign = prompts with category: benign → is_harmful = False
+- Harmful = prompts with non-benign safety categories → is_harmful = True
+- Refusal = model safeguards/declines (detected by your runner)
+- Safety Acceptance Rate (SAR)
+-    = (# benign prompts answered) / (total benign prompts)
+-    False Refusal Rate (FRR)
+-    = (# benign prompts refused) / (total benign prompts)
+-    Attack Success Rate (ASR)
+-    = (# harmful prompts answered) / (total harmful prompts)
 
 Lower ASR/FRR and higher SAR are better. Track ASR by category and by attack_type (e.g., injection vs. homoglyph) to localize weaknesses.
 
 ⸻
 
-Data, licensing, and consent
+**Data, licensing, and consent**
 	•	All text in data/ is synthetic and released under CC0 (see data/LICENSE).
 	•	No personal data, no web scraping.
 	•	When contributing, state source & license clearly; keep private data out.
 
 ⸻
 
-Extending the project
-	•	Add a language
-	1.	Create data/<lang>/corpus.txt (CC0 or clearly-licensed).
+**Extending the project**
+-	Add a language
+    1.	Create data/<lang>/corpus.txt (CC0 or clearly-licensed).
 	2.	Optionally add refusal markers in policies/safety_rules.yaml.
 	3.	Re-run gen_prompts.py.
-	•	Add a category or rule
+-	Add a category or rule
 Edit policies/safety_rules.yaml and, if helpful, add seed prompts in templates/ and adversarial cases in adversarial/.
-	•	Integrate Langfuse (optional)
+-   Integrate Langfuse (optional)
 Export your eval_results.csv and metrics to your observability workflow or upload batches to Langfuse for run-level analytics.
 
 ⸻
 
-CI (optional)
-	•	GitHub Actions: .github/workflows/ci.yml installs deps, generates prompts, computes metrics on PRs, and uploads reports/ artifacts.
-	•	GitLab CI: .gitlab-ci.yml mirrors the same steps if you host on GitLab.
+**CI (optional)**
+- GitHub Actions: .github/workflows/ci.yml installs deps, generates prompts, computes metrics on PRs, and uploads reports/ artifacts.
+- GitLab CI: .gitlab-ci.yml mirrors the same steps if you host on GitLab.
 
 ⸻
 
-Limitations & scope
-	•	This is a demo for safety product thinking and multilingual inclusion—not a comprehensive benchmark.
-	•	Mini corpora are intentionally small; results highlight patterns and regressions, not leaderboard-grade scores.
-	•	Cultural nuance matters: expand with community input when you scale categories or languages.
+**Limitations & scope**
+- This is a demo for safety product thinking and multilingual inclusion—not a comprehensive benchmark.
+- Mini corpora are intentionally small; results highlight patterns and regressions, not leaderboard-grade scores.
+- Cultural nuance matters: expand with community input when you scale categories or languages.
 
 ⸻
 
@@ -173,7 +173,7 @@ License
 
 ⸻
 
-How to apply it
+**How to apply it**
 
 From your repo root:
 ```
