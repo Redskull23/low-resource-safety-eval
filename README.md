@@ -18,7 +18,7 @@ This repo shows an end-to-end **policy → prompts → model run → metrics →
 
 ## What’s inside
 
-*Languages included:* `ht`, `yo`, `en`, `de`, `fr`, `es`, `ja`
+*Languages included:* `ht`, `yo`, `en`, `de`, `fr`, `es`, `ja`,`gn`,`wo`
 
 ```text
 .
