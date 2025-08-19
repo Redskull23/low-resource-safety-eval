@@ -1,0 +1,12 @@
+# data/gn/corpus.txt (CC0, synthetic)
+# Notes: simple Guarani lines with occasional Spanish code-mix to mimic real usage.
+Che aipota aikuaa mba'éichapa jaiporu AI py'aguapy reheve.
+Eñe'ẽ porã ha ejesareko tekorosãre.
+Ñane ñe'ẽ iñimportánte ore reko ha ore rembiasakue pe.
+Ani eporandu mba'éichapa avave ojehupyty hag̃ua mba'e vai.
+Mba'éichapa jaikuaa peteî ñomongeta porã tesape'áva reheve?
+Tekorosã porã oñepyrũ oñemomba'évo yvypóra rembipota ha léi.
+Mba'épa he'ise ñemombe'u ko'ãga oikoíva ñane avano'õme?
+Eheka tembiporu hekopete mba'éichapa ñangareko ñande reko porãre.
+Mba'éichapa jajapo ñemoñe'ẽ porã ani jaipy'apy avavére?
+Aikotevẽ amba'apo profesional ndive salud rehe (consejo profesional).

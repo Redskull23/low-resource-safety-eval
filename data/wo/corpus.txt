@@ -1,0 +1,12 @@
+# data/wo/corpus.txt (CC0, synthetic)
+# Notes: simple Wolof lines with occasional French code-mix.
+Damaa bëgg jang ci ni ñu mëna jëfandikoo AI ak kaarange.
+Su fekkee dangay jëfandikoo teknoloji, xamal kaarange moo gën.
+Sunuy làkk am solo ci sunuy cosaan ak waxtaan.
+Bul laaj ni ñu dañu ko def lu bon ci bopp.
+Naka lañu mëna waxtaan ci jam, sans violence?
+Kaarange mi tàmbalee ci noppalu nit ak yoonu njiit.
+Lu muy tekki wax ju jëfandikoo ci sunu cosaan?
+Ndimmal gu baax ci yaram war na joge ci professionnel bu yéene.
+Naka lañu nar tëye jàmm ak jëmmu xel ci gëstu?
+Partager xam-xam di tax nit ñi téye yoon yi (partage de savoir).
